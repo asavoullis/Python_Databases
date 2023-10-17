@@ -1,14 +1,40 @@
 from datetime import datetime
 
 Person_records = [
-    ("Tim", 19, "male", datetime.now().strftime('%Y-%m-%d'), "chicken"),
-    ("Jake", 20, "male", datetime.now().strftime('%Y-%m-%d'), "beef"),
-    ("Jack", 21, "male", datetime.now().strftime('%Y-%m-%d'), "lemon soup"),
-    ("Joe", 32, "male", datetime.now().strftime('%Y-%m-%d'), "orange"),
-    ("Maria", 22, "female", datetime.now().strftime('%Y-%m-%d'), "banana"),
-    ("Kate", 35, "female", datetime.now().strftime('%Y-%m-%d'), "banana"),
-    ("Daniel", 28, "male", datetime.now().strftime('%Y-%m-%d'), "tomato"),
-    ("Jess", 45, "female", datetime.now().strftime('%Y-%m-%d'), "banana"),
+    ("Tim", 19, "male", datetime.now().strftime('%Y-%m-%d'), 2),
+    ("Elune", 20, "female", datetime.now().strftime('%Y-%m-%d'), 11),
+    ("Jake", 20, "male", datetime.now().strftime('%Y-%m-%d'), 12),
+    ("Jack", 21, "male", datetime.now().strftime('%Y-%m-%d'), 13),
+    ("Joe", 32, "male", datetime.now().strftime('%Y-%m-%d'), 14),
+    ("Maria", 22, "female", datetime.now().strftime('%Y-%m-%d'), 15),
+    ("Alan", 20, "male", datetime.now().strftime('%Y-%m-%d'), 1),
+    ("Kate", 35, "female", datetime.now().strftime('%Y-%m-%d'), 15),
+    ("Daniel", 28, "male", datetime.now().strftime('%Y-%m-%d'), 16),
+    ("Jess", 45, "female", datetime.now().strftime('%Y-%m-%d'), 15),
+    ("Dora", 29, "female", datetime.now().strftime('%Y-%m-%d'), 5),
+    ("Jane", 55, "female", datetime.now().strftime('%Y-%m-%d'), 3),
+    ("Albert", 48, "male", datetime.now().strftime('%Y-%m-%d'), 16),
+    ("Jacob", 44, "male", datetime.now().strftime('%Y-%m-%d'), 6),
+    ("Daniel", 77, "male", datetime.now().strftime('%Y-%m-%d'), 1),
+]
+
+Food_records = [
+    (1, "Apple", 52, 1.25, 150, "Fruit"),
+    (2, "Chicken Breast", 165, 5.99, 200, "Meat"),
+    (3, "Broccoli", 55, 2.49, 150, "Vegetable"),
+    (4, "Chocolate Bar", 546, 2.99, 100, "Sweets"),
+    (5, "Salmon", 206, 8.75, 150, "Fish"),
+    (6, "Oatmeal", 68, 1.99, 100, "Grains"),
+    (7, "Yogurt", 59, 3.49, 200, "Dairy"),
+    (8, "Pasta", 131, 1.79, 100, "Grains"),
+    (9, "Spinach", 23, 1.99, 100, "Vegetable"),
+    (10, "Ice Cream", 207, 4.99, 150, "Sweets"),
+    (11, "Pork", 143, 4.25, 200, "Meat"),
+    (12, "Beef", 250, 7.99, 200, "Meat"),
+    (13, "Lemon Soup", 30, 3.99, 250, "Soup"),
+    (14, "Orange", 43, 1.99, 150, "Fruit"),
+    (15, "Banana", 105, 0.99, 120, "Fruit"),
+    (16, "Tomato", 18, 0.75, 100, "Vegetable"),
 ]
 
 Skills_records = [
