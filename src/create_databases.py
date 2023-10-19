@@ -44,18 +44,12 @@ mycursor.execute("""
 """)
 result = mycursor.fetchone()
 
+print("")
 # Check if a foreign key constraint was found
 if result:
     foreign_key_name = result[0]
     print(f"Found foreign key constraint: {foreign_key_name}")
-
-    # Drop the foreign key constraint
-    mycursor.execute(f"ALTER TABLE Person DROP FOREIGN KEY {foreign_key_name}")
-    print(f"The foreign key constraint {foreign_key_name} has been dropped.")
-
-print_table_description(mycursor, "Person")
-sql_person_query = "INSERT INTO Person (name, age, gender, created_date, favouriteFood) VALUES (%s, %s, %s, %s, %s)"
-insert_data(mycursor, Person_records, sql_person_query)
+    print("")
 
 print_table_description(mycursor, "Food")  # - FOR TESTING ONLY
 sql_food_query = "INSERT INTO Food (foodname, calories_per_100g, price, weight, category) VALUES (%s, %s, %s, %s, %s)"
@@ -63,8 +57,10 @@ sql_food_query = "INSERT INTO Food (foodname, calories_per_100g, price, weight, 
 Food_records = [(record[1], record[2], record[3], record[4], record[5]) for record in Food_records]
 insert_data(mycursor, Food_records, sql_food_query)
 
-# drop_and_create_table(mycursor, "Food", food_table_definition)
-# drop_and_create_table(mycursor, "Person", person_table_definition)
+print_table_description(mycursor, "Person")
+sql_person_query = "INSERT INTO Person (name, age, gender, created_date, favouriteFood) VALUES (%s, %s, %s, %s, %s)"
+insert_data(mycursor, Person_records, sql_person_query)
+
 
 # Commit the changes to make them permanent
 db_connection.commit()
@@ -75,13 +71,27 @@ print("\nData in Person Table:")
 for x in mycursor:
     print(x)
 
-
-
 # Fetch and print the results of the "Food" table - FOR TESTING ONLY
 mycursor.execute("SELECT * FROM Food")
 print("\nData in Food Table:")
 for x in mycursor:
     print(x)
+
+
+# Drop the foreign_key constraints so we can drop and recreate the tables
+print("")
+# Check if a foreign key constraint was found
+if result:
+    foreign_key_name = result[0]
+    print(f"Found foreign key constraint: {foreign_key_name}")
+    print("")
+
+    # Drop the foreign key constraint
+    mycursor.execute(f"ALTER TABLE Person DROP FOREIGN KEY {foreign_key_name}")
+    print(f"The foreign key constraint {foreign_key_name} has been dropped.")
+
+drop_and_create_table(mycursor, "Food", food_table_definition)
+drop_and_create_table(mycursor, "Person", person_table_definition)
 
 # Close the cursor and connection
 mycursor.close()
