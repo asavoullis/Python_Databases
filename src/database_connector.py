@@ -2,10 +2,8 @@ import mysql.connector
 from configparser import ConfigParser
 import logging
 
-# Function for database connection with error handling
-def create_connection():
-    try:
-        def read_db_config(filename='database_config.ini', section='MySQL'):
+# Creates a dictionary with the params in database_config.ini
+def read_db_config(filename='database_config.ini', section='MySQL'):
             parser = ConfigParser()
             parser.read(filename)
             db_config = {}
@@ -17,6 +15,9 @@ def create_connection():
                 raise Exception(f"Section {section} not found in the {filename} file")
             return db_config
 
+# Function for database connection with error handling
+def create_connection():
+    try:
         db_config = read_db_config()
         connection = mysql.connector.connect(
             host=db_config['host'],
