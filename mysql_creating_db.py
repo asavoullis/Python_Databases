@@ -51,6 +51,7 @@ mycursor.execute("""
 
 print("")
 mycursor.execute("DESCRIBE Person")
+print("Person Table Description:")
 for row in mycursor:
     print(row)
 print("")
@@ -64,21 +65,26 @@ mycursor.execute("""
 
 mycursor.execute("DESCRIBE Skills")
 
-for row in mycursor:
-    print(row)
-
 # Fetch and print the results of the "Person" table description
-print("Person Table Description:")
+print("Skills Table Description:")
 for row in mycursor.fetchall():
     print(row)
+print("")
 
+
+mycursor.execute("INSERT INTO Person (name, age, favouriteFood) VALUES (%s, %s, %s)", ("Tim", 19, "chicken"))
+mycursor.execute("INSERT INTO Person (name, age, favouriteFood) VALUES (%s, %s, %s)", ("Jake", 20, "beef"))
+mycursor.execute("INSERT INTO Person (name, age, favouriteFood) VALUES (%s, %s, %s)", ("Jack", 21, "lemon soup"))
+mycursor.execute("INSERT INTO Person (name, age, favouriteFood) VALUES (%s, %s, %s)", ("Joe", 32, "orange"))
+mycursor.execute("INSERT INTO Person (name, age, favouriteFood) VALUES (%s, %s, %s)", ("Daniel", 28, "tomatoe"))
 
 # Commit the changes to make them permanent
 db.commit()
 
-# print("Skills Table Description:")
-# for row in mycursor.fetchall():
-#     print(row)
+mycursor.execute("SELECT * FROM Person")
+for x in mycursor:
+    print(x)
 
-# mycursor.close()
-# db.close()
+
+mycursor.close()
+db.close()
