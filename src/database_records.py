@@ -1,4 +1,5 @@
-[PersonData]
+from datetime import datetime
+
 Person_records = [
     ("Tim", 19, "male", datetime.now().strftime('%Y-%m-%d'), "chicken"),
     ("Jake", 20, "male", datetime.now().strftime('%Y-%m-%d'), "beef"),
