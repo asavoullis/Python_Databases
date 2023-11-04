@@ -10,3 +10,18 @@ Person_records = [
     ("Daniel", 28, "male", datetime.now().strftime('%Y-%m-%d'), "tomato"),
     ("Jess", 45, "female", datetime.now().strftime('%Y-%m-%d'), "banana"),
 ]
+
+Skills_records = [
+    ("AWS", "Frameworks", "Proficient", 2),
+    ("Snowflake", "Tools", "Intermediate", 2),
+    ("Flask", "Frameworks", "Proficient", 2),
+    ("Django", "Frameworks", "Intermediate", 1),
+    ("DBT", "Tools", "Proficient", 1),
+    ("Databricks", "Frameworks", "Intermediate", 1),
+    ("Apache Spark", "Frameworks", "Intermediate", 1),
+    ("Airflow", "Tools", "Proficient", 1),
+    ("Python", "Coding", "Proficient", 4),
+    ("SQL", "Coding", "Proficient", 3),
+    ("Bash", "Coding", "Intermediate", 2),
+    ("DAX", "Coding", "Intermediate", 1),
+]
