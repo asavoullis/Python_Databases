@@ -22,7 +22,8 @@ Before using the code in this repository, make sure you have the following insta
 
 - Python 3.9.7
 - Any necessary Python packages (specified in requirements.txt)
-- Database server (e.g., PostgreSQL, MySQL, SQLite)
+- MySQL Server 8.0.035
+- MySQL Workbench 8.0.034
 
 ## Getting Started
 
@@ -46,8 +47,6 @@ Before using the code in this repository, make sure you have the following insta
 The repository is organized as follows:
 
 - `src/`: Contains the Python scripts and code snippets for database manipulation.
-- `examples/`: Provides usage examples and demonstrations.
-- `docs/`: Documentation and additional resources.
 
 Feel free to explore the directories to find code that matches your use case.
 
@@ -61,4 +60,4 @@ Charilaos A Savoullis
 
 ## Usage
 
-To use the provided code snippets, follow the instructions in the respective script or example files. Additionally, refer to the documentation in the `docs/` directory for detailed explanations and best practices.
+Feel free to adjust any part of it according to your preferences or specific details about your repository.

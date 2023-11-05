@@ -1,0 +1,5 @@
+src/database_config.ini
+src/__pycache__
+database_config.ini
+database_analysis.py
+mysql_creating_db.py
