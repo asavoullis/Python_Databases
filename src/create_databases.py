@@ -1,6 +1,27 @@
 from database_connector import create_connection, close_connection
 from database_records import Person_records, Skills_records
 
+def drop_and_create_table(mycursor, table_name, table_definition):
+    mycursor.execute(f"SHOW TABLES LIKE '{table_name}'")
+    table_exists = mycursor.fetchone()
+
+    if table_exists:
+        mycursor.execute(f"DROP TABLE {table_name}")
+        print(f"The table {table_name} has been dropped.")
+    
+    mycursor.execute(table_definition)
+
+def print_table_description(mycursor, table_name):
+    mycursor.execute(f"DESCRIBE {table_name}")
+    print(f"{table_name} Table Description:")
+    for row in mycursor.fetchall():
+        print(row)
+    print("")
+
+def insert_data(mycursor, records, insert_query):
+    for record_data in records:
+        mycursor.execute(insert_query, record_data)
+
 # Create a database connection
 db_connection = create_connection()
 
@@ -10,19 +31,8 @@ mycursor = db_connection.cursor()
 # Select the database
 mycursor.execute("USE Database_python")
 
-# Create or drop the "Person" table
-table_name = "Person"
-mycursor.execute(f"SHOW TABLES LIKE '{table_name}'")
-table_exists = mycursor.fetchone()
-
-if table_exists:
-    mycursor.execute(f"DROP TABLE {table_name}")
-    print(f"The table {table_name} has been dropped.")
-else:
-    print(f"The table {table_name} does not exist.")
-
-# Creating the "Person" table
-mycursor.execute("""
+# Define table definitions
+person_table_definition = """
     CREATE TABLE IF NOT EXISTS Person (
         personID INT PRIMARY KEY AUTO_INCREMENT,
         name VARCHAR(255),
@@ -31,58 +41,33 @@ mycursor.execute("""
         created_date datetime NOT NULL,
         favouriteFood VARCHAR(255) NOT NULL
     )
-""")
+"""
 
-# Print "Person" table description
-mycursor.execute("DESCRIBE Person")
-print("Person Table Description:")
-for row in mycursor:
-    print(row)
-print("")
+skills_table_definition = """
+    CREATE TABLE IF NOT EXISTS Skills (
+        skillID INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        category ENUM('Frameworks', 'Tools', 'Coding Language', 'Methodology') NOT NULL,
+        proficiency_level VARCHAR(50) NOT NULL,
+        years_of_experience INT NOT NULL CHECK (years_of_experience > 0)
+    )
+"""
+
+# Drop if exists and re-create the "Person" table
+drop_and_create_table(mycursor, "Person", person_table_definition)
+
+# Print "Person" table description - FOR TESTING ONLY
+print_table_description(mycursor, "Person")
 
 # Insert data into the "Person" table
 sql_person_query = "INSERT INTO Person (name, age, gender, created_date, favouriteFood) VALUES (%s, %s, %s, %s, %s)"
-
-for person_data in Person_records:
-    mycursor.execute(sql_person_query, person_data)
+insert_data(mycursor, Person_records, sql_person_query)
 
 
-# Create or drop the "Person" table
-table_name = "Skills"
-mycursor.execute(f"SHOW TABLES LIKE '{table_name}'")
-table_exists = mycursor.fetchone()
-
-if table_exists:
-    mycursor.execute(f"DROP TABLE {table_name}")
-    print(f"The table {table_name} has been dropped.")
-else:
-    print(f"The table {table_name} does not exist.")
-
-
-mycursor.execute("""
-    CREATE TABLE IF NOT EXISTS Skills (
-        skillID INT PRIMARY KEY AUTO_INCREMENT,
-        name VARCHAR(255),
-        category VARCHAR(255),
-        proficiency_level VARCHAR(50),
-        years_of_experience INT
-    )
-""")
-
-
-mycursor.execute("DESCRIBE Skills")
-
-# Fetch and print the results of the "Person" table description
-print("Skills Table Description:")
-for row in mycursor.fetchall():
-    print(row)
-print("")
-
-# Insert data into the "Skills" table
+drop_and_create_table(mycursor, "Skills", skills_table_definition)
+print_table_description(mycursor, "Skills") # - FOR TESTING ONLY
 sql_skills_query = "INSERT INTO Skills (name, category, proficiency_level, years_of_experience) VALUES (%s, %s, %s, %s)"
-
-for skills_data in Skills_records:
-    mycursor.execute(sql_skills_query, skills_data)
+insert_data(mycursor, Skills_records, sql_skills_query)
 
 # Commit the changes to make them permanent
 db_connection.commit()
@@ -93,6 +78,7 @@ print("\nData in Person Table:")
 for x in mycursor:
     print(x)
 
+# Fetch and print the results of the "Skills" table
 mycursor.execute("SELECT * FROM Skills")
 print("\nData in Skills Table:")
 for x in mycursor:
